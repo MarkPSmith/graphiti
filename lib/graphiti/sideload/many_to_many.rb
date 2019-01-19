@@ -25,8 +25,9 @@ class Graphiti::Sideload::ManyToMany < Graphiti::Sideload::HasMany
 
   def assign_each(parent, children)
     children.select do |c|
-      match = ->(ct) { ct.send(true_foreign_key) == parent.send(primary_key) }
-      c.send(through).any?(&match)
+      #match = ->(ct) { ct.send(true_foreign_key) == parent.send(primary_key) }
+      #c.send(through).any?(&match)
+      true
     end
   end
 end
