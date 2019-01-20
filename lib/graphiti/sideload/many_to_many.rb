@@ -24,10 +24,12 @@ class Graphiti::Sideload::ManyToMany < Graphiti::Sideload::HasMany
   end
 
   def assign_each(parent, children)
-    children.select do |c|
-      #match = ->(ct) { ct.send(true_foreign_key) == parent.send(primary_key) }
-      #c.send(through).any?(&match)
-      true
+    result = []
+    children.each do |child|
+      parent.send(through).each do |pc|
+        result << child if child.id == pc.id
+      end
     end
+    result
   end
 end
