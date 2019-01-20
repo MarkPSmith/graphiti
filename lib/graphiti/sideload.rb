@@ -35,9 +35,9 @@ module Graphiti
       @link                  = opts[:link]
       @single                = opts[:single]
       @remote                = opts[:remote]
-      @through_primary_key = opts[:through_primary_key]
+      @through_primary_key   = opts[:through_primary_key]
       apply_belongs_to_many_filter if type == :many_to_many
-      puts "sideload initialize #{@through_primary_key}"
+      
       @description           = opts[:description]
 
       # polymorphic-specific
