@@ -17,7 +17,7 @@ class Graphiti::Adapters::ActiveRecord::ManyToManySideload < Graphiti::Sideload:
   private
 
   def belongs_to_many_clause(value)
-    where = { m2m_where_foreign_key => value }.tap do |c|
+    where = { through_primary_key => value }.tap do |c|
       if polymorphic?
         c[foreign_type_column] = foreign_type_value
       end

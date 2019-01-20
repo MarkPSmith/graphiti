@@ -35,9 +35,9 @@ module Graphiti
       @link                  = opts[:link]
       @single                = opts[:single]
       @remote                = opts[:remote]
-      @m2m_where_foreign_key = opts[:m2m_where_foreign_key]
+      @through_primary_key = opts[:through_primary_key]
       apply_belongs_to_many_filter if type == :many_to_many
-      puts "sideload initialize #{@m2m_where_foreign_key}"
+      puts "sideload initialize #{@through_primary_key}"
       @description           = opts[:description]
 
       # polymorphic-specific
@@ -53,8 +53,8 @@ module Graphiti
       end
     end
 
-    def m2m_where_foreign_key
-      @m2m_where_foreign_key ||= true_foreign_key
+    def through_primary_key
+      @through_primary_key ||= true_foreign_key
     end
 
     def self.scope(&blk)
