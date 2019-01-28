@@ -17,6 +17,7 @@ module Graphiti
           belongs_to: ::Graphiti::Sideload::BelongsTo,
           has_one: ::Graphiti::Sideload::HasOne,
           many_to_many: ::Graphiti::Sideload::ManyToMany,
+          many_to_many_self_referential: ::Graphiti::Sideload::ManyToManySelfReferential,
           polymorphic_belongs_to: ::Graphiti::Sideload::PolymorphicBelongsTo
         }
       end

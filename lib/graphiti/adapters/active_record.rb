@@ -6,13 +6,15 @@ module Graphiti
       require 'graphiti/adapters/active_record/belongs_to_sideload'
       require 'graphiti/adapters/active_record/has_one_sideload'
       require 'graphiti/adapters/active_record/many_to_many_sideload'
+      require 'graphiti/adapters/active_record/many_to_many_self_referential_sideload'
 
       def self.sideloading_classes
         {
           has_many: Graphiti::Adapters::ActiveRecord::HasManySideload,
           has_one: Graphiti::Adapters::ActiveRecord::HasOneSideload,
           belongs_to: Graphiti::Adapters::ActiveRecord::BelongsToSideload,
-          many_to_many: Graphiti::Adapters::ActiveRecord::ManyToManySideload
+          many_to_many: Graphiti::Adapters::ActiveRecord::ManyToManySideload,
+          many_to_many_self_referential: Graphiti::Adapters::ActiveRecord::ManyToManySelfReferentialSideload
         }
       end
 

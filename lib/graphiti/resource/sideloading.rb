@@ -50,6 +50,11 @@ module Graphiti
           allow_sideload(name, opts, &blk)
         end
 
+        def many_to_many_self_referential(name, opts = {}, &blk)
+          opts[:class] ||= adapter.sideloading_classes[:many_to_many_self_referential]
+          allow_sideload(name, opts, &blk)
+        end
+
         def polymorphic_belongs_to(name, opts = {}, &blk)
           opts[:resource] ||= Class.new(::Graphiti::Resource) do
             self.polymorphic = []

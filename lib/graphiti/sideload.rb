@@ -1,7 +1,7 @@
 module Graphiti
   class Sideload
     HOOK_ACTIONS = [:save, :create, :update, :destroy, :disassociate]
-    TYPES = [:has_many, :belongs_to, :has_one, :many_to_many]
+    TYPES = [:has_many, :belongs_to, :has_one, :many_to_many, :many_to_many_self_referential]
 
     attr_reader :name,
       :resource_class,
@@ -36,7 +36,7 @@ module Graphiti
       @link                  = opts[:link]
       @single                = opts[:single]
       @remote                = opts[:remote]
-      apply_belongs_to_many_filter if type == :many_to_many
+      apply_belongs_to_many_filter if type == :many_to_many || :many_to_many_self_referential
 
       @description           = opts[:description]
 
