@@ -12,15 +12,15 @@ class Graphiti::Util::Persistence
     @relationships = relationships
     @caller_model  = caller_model
 
-    @attributes.each_pair do |key, value|
-      @attributes[key] = @resource.typecast(key, value, :writable)
-    end
-
     # Find the correct child resource for a given jsonapi type
     if meta_type = @meta[:type].try(:to_sym)
       if @resource.type != meta_type && @resource.polymorphic?
         @resource = @resource.class.resource_for_type(meta_type).new
       end
+    end
+
+    @attributes.each_pair do |key, value|
+      @attributes[key] = @resource.typecast(key, value, :writable)
     end
   end
 
@@ -80,9 +80,15 @@ class Graphiti::Util::Persistence
     return if x[:sideload].type == :many_to_many
 
     if [:destroy, :disassociate].include?(x[:meta][:method])
+      if x[:sideload].polymorphic_has_many?
+        attrs[:"#{x[:sideload].polymorphic_as}_type"] = nil
+      end
       attrs[x[:foreign_key]] = nil
       update_foreign_type(attrs, x, null: true) if x[:is_polymorphic]
     else
+      if x[:sideload].polymorphic_has_many?
+        attrs[:"#{x[:sideload].polymorphic_as}_type"] = parent_object.class.name
+      end
       attrs[x[:foreign_key]] = parent_object.send(x[:primary_key])
       update_foreign_type(attrs, x) if x[:is_polymorphic]
     end
