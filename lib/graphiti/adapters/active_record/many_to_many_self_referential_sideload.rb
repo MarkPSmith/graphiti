@@ -51,7 +51,7 @@ class Graphiti::Adapters::ActiveRecord::ManyToManySelfReferentialSideload < Grap
   def infer_foreign_key
     through_class = Object.const_get(through_reflection.options[:class_name])
     key = association_name.to_s
-    value = through_class.reflections[parent_reflection.source_reflection_name].options[:foreign_key] 
+    value = through_class.reflections[parent_reflection.source_reflection_name.to_s].options[:foreign_key] 
     
     { key => value }
   end
