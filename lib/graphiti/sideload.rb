@@ -36,7 +36,7 @@ module Graphiti
       @link                  = opts[:link]
       @single                = opts[:single]
       @remote                = opts[:remote]
-      apply_belongs_to_many_filter if type == :many_to_many || :many_to_many_self_referential
+      apply_belongs_to_many_filter if (type == :many_to_many || type == :many_to_many_self_referential)
 
       @description           = opts[:description]
 
